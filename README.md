@@ -1,37 +1,64 @@
 # Environmental_Montior
 
-#### 介绍
-【FreeRTOS实战】基于FreeRTOS的STM32一主板多节点的环境监测系统（温度、湿度、光照等）
+## 介绍
+> &emsp;&emsp;本项目是一个基于FreeRTOS的STM32实战项目，项目采用一主多从的环境监测系统（温度、湿度、光照、烟雾）。主节点是一个中继节点，它既需要向下**收集**各个分节点通过LORA发送的数据，再处理后经WIFI发送到服务器；也需要经WIFI接收服务器发送过来的数据，经处理后通过LORA发送到各个分节点。
 
-#### 软件架构
-软件架构说明
+## 项目环境说明
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+> * 开发板：选择**STM32ZET6作为系统主板**，采用**STM32C8T6作为系统节点**；
+> * 操作系统：系统主板与节点均**采用FreeRTOS作为操作系统**；
+> * IED：采用Keil5作为集成开发环境；
+> * 数据传输：本系统采用**LORA作为主板与节点之间的传输媒介，采用WIFI作为主板与服务器的数据收发方式**；
+> * 数据传输格式：为了系统与主板更好解析数据，**采用jsion格式传输数据**；
 
 
-#### 特技
+## git commit提交规范
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+git commit提交描述信息格式: `<type>(<scope>): <subject>`，例如：add(sensor/src):添加一个烟雾传感器测量烟雾值。
+
+**type: 操作类型**
+
+|   类型   |       描述       |
+| :------: | :--------------: |
+|   add    |     新增功能     |
+|  update  |     更新功能     |
+|  delete  |     删除功能     |
+|   fix    |     修复 BUG     |
+| refactor |     代码重构     |
+|  revert  |  撤销上次commit  |
+|  style   |   代码风格更改   |
+|   docs   | 修改文档相关内容 |
+
+**scope: 影响范围**
+
+用于说明本次 commit 的影响范围，比如: 具体功能或模块，控制器层，业务层，模型层等，视项目不同而不同。
+
+ **subject: 简单描述**
+
+本次 commit 的简单描述，一般不超过 50 个字符。推荐以动词开头: 新增，修改，设置撤销等等。
+
+#### 项目目录说明
+
+> |---App：STM32外设目录
+>
+> |	|---inc：STM32外设实现的.h头文件目录
+>
+> |	|---src：STM32外设实现的.c文件目录
+>
+> |---FreeRTOS_Source：FreeRTOS操作系统目录
+>
+> |	|---inc：FreeRTOS实现的.h头文件目录
+>
+> |	|---portable：可替换的FreeRTOS内核管理目录
+>
+> |		|---MemMang：FreeRTOS内存管理文件夹
+>
+> |		|---RVDS：IDE为keil的Cortex必要文件
+>
+> |---Sensor：传感器目录
+>
+> |	|---inc：传感器实现的.h头文件目录
+>
+> |	|---src：传感器实现的.c文件目录
+>
+> |---STM32Project：STM32项目工程的目录
