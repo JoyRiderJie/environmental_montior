@@ -39,26 +39,26 @@ git commit提交描述信息格式: `<type>(<scope>): <subject>`，例如：add(
 
 #### 项目目录说明
 
-> |---App：STM32外设目录
+> |------App：STM32外设目录
 >
-> |	|---inc：STM32外设实现的.h头文件目录
+> |&emsp;&emsp;&emsp;|---inc：STM32外设实现的.h头文件目录
 >
-> |	|---src：STM32外设实现的.c文件目录
+> |&emsp;&emsp;&emsp;|---src：STM32外设实现的.c文件目录
 >
-> |---FreeRTOS_Source：FreeRTOS操作系统目录
+> |------FreeRTOS_Source：FreeRTOS操作系统目录
 >
-> |	|---inc：FreeRTOS实现的.h头文件目录
+> |&emsp;&emsp;&emsp;|---inc：FreeRTOS实现的.h头文件目录
 >
-> |	|---portable：可替换的FreeRTOS内核管理目录
+> |&emsp;&emsp;&emsp;|---portable：可替换的FreeRTOS内核管理目录
 >
-> |		|---MemMang：FreeRTOS内存管理文件夹
+> |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|---MemMang：FreeRTOS内存管理文件夹
 >
-> |		|---RVDS：IDE为keil的Cortex必要文件
+> |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|---RVDS：IDE为keil的Cortex必要文件
 >
-> |---Sensor：传感器目录
+> |------Sensor：传感器目录
 >
-> |	|---inc：传感器实现的.h头文件目录
+> |&emsp;&emsp;&emsp;|---inc：传感器实现的.h头文件目录
 >
-> |	|---src：传感器实现的.c文件目录
+> |&emsp;&emsp;&emsp;|---src：传感器实现的.c文件目录
 >
-> |---STM32Project：STM32项目工程的目录
+> |------STM32Project：STM32项目工程的目录
