@@ -1,7 +1,7 @@
 # Environmental_Montior
 
 ## 介绍
-> &emsp;&emsp;本项目是一个基于FreeRTOS的STM32实战项目，项目采用一主多从的环境监测系统（温度、湿度、光照、烟雾）。主节点是一个中继节点，它既需要向下**收集**各个分节点通过LORA发送的数据，再处理后经WIFI发送到服务器；也需要经WIFI接收服务器发送过来的数据，经处理后通过LORA发送到各个分节点。
+> &emsp;&emsp;本项目是一个基于FreeRTOS的STM32实战项目，项目采用一主多从的环境监测系统（温度、湿度、光照、烟雾）。主节点是一个中继节点，它既需要向下**收集**各个分节点通过LORA发送的数据，再处理后经WIFI发送到服务器；也需要经WIFI接收服务器发送过来的数据，经处理后通过LORA发送到各个分节点。并且项目可兼顾室内环境调节，项目采用电机模拟空调制冷降低室内环境温度，采用LED灯模拟空调制热上升环境温度。
 
 ## 项目环境说明
 
@@ -11,6 +11,37 @@
 > * 数据传输：本系统采用**LORA作为主板与节点之间的传输媒介，采用WIFI作为主板与服务器的数据收发方式**；
 > * 数据传输格式：为了系统与主板更好解析数据，**采用jsion格式传输数据**；
 
+
+
+## 项目目录说明
+
+> |------App：STM32外设目录
+>
+> |-------------inc：STM32外设实现的.h头文件目录
+>
+> |-------------src：STM32外设实现的.c文件目录
+>
+> |------FreeRTOS_Source：FreeRTOS操作系统目录
+>
+> |-------------inc：FreeRTOS实现的.h头文件目录
+>
+> |-------------portable：可替换的FreeRTOS内核管理目录
+>
+> |-------------MemMang：FreeRTOS内存管理目录
+>
+> |-------------RVDS：IDE为keil的Cortex必要目录
+>
+> |------Sensor：传感器目录
+>
+> |--------------inc：传感器实现的.h头文件目录
+>
+> |--------------src：传感器实现的.c文件目录
+>
+> |------myProject：项目工程目录
+>
+> |-------------c8t6Project：STM32F103C8T6工程目录
+>
+> |-------------c8t6Project：STM32F103ZET6工程目录
 
 ## git commit提交规范
 
@@ -36,29 +67,3 @@ git commit提交描述信息格式: `<type>(<scope>): <subject>`，例如：add(
  **subject: 简单描述**
 
 本次 commit 的简单描述，一般不超过 50 个字符。推荐以动词开头: 新增，修改，设置撤销等等。
-
-#### 项目目录说明
-
-> |------App：STM32外设目录
->
-> |&emsp;&emsp;&emsp;|---inc：STM32外设实现的.h头文件目录
->
-> |&emsp;&emsp;&emsp;|---src：STM32外设实现的.c文件目录
->
-> |------FreeRTOS_Source：FreeRTOS操作系统目录
->
-> |&emsp;&emsp;&emsp;|---inc：FreeRTOS实现的.h头文件目录
->
-> |&emsp;&emsp;&emsp;|---portable：可替换的FreeRTOS内核管理目录
->
-> |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|---MemMang：FreeRTOS内存管理文件夹
->
-> |&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|---RVDS：IDE为keil的Cortex必要文件
->
-> |------Sensor：传感器目录
->
-> |&emsp;&emsp;&emsp;|---inc：传感器实现的.h头文件目录
->
-> |&emsp;&emsp;&emsp;|---src：传感器实现的.c文件目录
->
-> |------STM32Project：STM32项目工程的目录
