@@ -30,6 +30,8 @@ extern uint16_t time2Count;
 //void Tim2Delay_us(__IO uint32_t nTime);
 
 uint32_t DWT_Dalay_Init(void);
+
+
 //延时函数,参数是n微秒
 void DWT_Delay_us(volatile uint32_t nus);
 
