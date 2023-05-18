@@ -67,3 +67,17 @@ git commit提交描述信息格式: `<type>(<scope>): <subject>`，例如：add(
  **subject: 简单描述**
 
 本次 commit 的简单描述，一般不超过 50 个字符。推荐以动词开头: 新增，修改，设置撤销等等。
+
+## 模块连接说明
+
+### LORA的连接方式
+
+| LORA | 主板 |
+| :--: | :--: |
+| VCC  | 3.3V |
+| GND  | GND  |
+| MDO  | PA15 |
+| AUX  | PA4  |
+| RXD  | PB10 |
+| TXD  | PB11 |
+
