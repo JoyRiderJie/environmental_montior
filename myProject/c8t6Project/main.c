@@ -2,11 +2,11 @@
 
 int main(void)
 {
-	sysInit();
-	
-	while(1)
-	{
-		sysWork();
-	}
-	
+    sysInit();
+
+    while(1)
+    {
+        sysWork();
+    }
+
 }

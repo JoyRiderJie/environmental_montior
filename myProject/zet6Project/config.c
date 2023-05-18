@@ -1,7 +1,5 @@
 #include "config.h"
 
-#include "config.h"
-
 /*  FreeRTOS函数返回值 */
 BaseType_t res[10];
 
@@ -27,11 +25,20 @@ extern struct uartParam usart3Param;
 void hardwareInit(void)
 {
 #if USARTFUNCTION==1
-	// 串口必要的参数
+	// 串口1必要的参数
 	struct uartParam usart1Param = {USART1,RCC_APB2Periph_USART1|RCC_APB2Periph_GPIOA,NULL,GPIOA,GPIO_Pin_10,GPIO_Pin_9,
 	{115200,USART_WordLength_8b,USART_StopBits_1,USART_Parity_No,USART_Mode_Rx | USART_Mode_Tx,USART_HardwareFlowControl_None}};
 	NVIC_InitTypeDef usart1NVIC_InitStructure = {USART1_IRQn,3,3,ENABLE};
 #endif
+	
+	// 串口4必要的参数
+	struct uartParam usart4Param = {UART4,RCC_APB2Periph_GPIOC,RCC_APB1Periph_UART4,GPIOC,GPIO_Pin_11,GPIO_Pin_10,
+	{115200,USART_WordLength_8b,USART_StopBits_1,USART_Parity_No,USART_Mode_Rx | USART_Mode_Tx,USART_HardwareFlowControl_None}};
+	NVIC_InitTypeDef usart4NVIC_InitStructure = {USART1_IRQn,1,2,ENABLE};
+	// 定时器7必要参数
+	struct timeParam tim7Param = {TIM3,RCC_APB1Periph_TIM7,{100-1,TIM_CKD_DIV1,7200-1,TIM_CounterMode_Up}};
+	NVIC_InitTypeDef tim7NVIC_InitStructure = {TIM7_IRQn,0,2,ENABLE};
+	
 	
 	// 定时器2必要的参数
 //	struct timeParam tim2 = {TIM2,RCC_APB1Periph_TIM2,{71,TIM_CKD_DIV1,2,TIM_CounterMode_Up}};
@@ -54,6 +61,13 @@ void hardwareInit(void)
 	ledInit();
 	// LORA 初始化
 	loraInit();
+	// OLED 初始化
+	OLED_Init();
+	// 与ESP9266相关的串口4初始化定时器7
+	usartInit(&usart4Param,&usart4NVIC_InitStructure);
+	// 初始化定时器7
+    timInit(&tim7Param,&tim7NVIC_InitStructure);
+	
 
 	// 上电延时
 	DWT_Delay_us(100000);
@@ -91,10 +105,11 @@ void sysInit(void)
 	// STM32外设初始化
 	hardwareInit();
 	
+#if RTOSFLAG==1
 	// 创建一个FreeRTOS创建函数
 	xTaskCreate((TaskFunction_t)createAllTask,(char*)"createTask",512,(void *)NULL,2,&taskControl[0]);
-	
 	vTaskStartScheduler();
+#endif
 }
 
 /*******************************************
@@ -104,7 +119,7 @@ void sysInit(void)
 *******************************************/
 void sysWork(void)
 {
-		
+	LoRa_ReceData();
 }
 
 /*****************************************

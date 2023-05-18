@@ -3,7 +3,7 @@
 
 
 /* STM32 files */
-#include "stm32f10x.h"   
+#include "stm32f10x.h"
 
 /* C files */
 #include "string.h"
@@ -27,12 +27,12 @@
 #include "timers.h"
 
 /* 传感器任务   */
-#define 	BH1750Task   			1
+#define 	BH1750Task   			0
 #define 	DH11Task     			1
-#define 	MQ2Task      			1
+#define 	MQ2Task      			0
 #define 	FANTask      			0
 #define 	LEDTASK      			0
-#define 	LORATASK      			1
+#define 	LORATASK      			0
 
 /* 开发板外设功能 */
 #define 	USARTFUNCTION			01
@@ -48,23 +48,23 @@
 #define 	EVENT8 		(0x01 << 7)
 
 /*  消息队列的结构体  */
-struct queueMsg{
-	// 消息的ID
-	int id;
-	// 消息内容
-	void*text;
+struct queueMsg {
+    // 消息的ID
+    int id;
+    // 消息内容
+    void*text;
 };
 
 /* NVIC结构体  */
-struct nvicParam{
-	// NVIC通道
-	uint8_t NVIC_IRQChannel;
-	// 抢占优先级
-	uint8_t NVIC_IRQChannelPreemptionPriority;
-	// 响应优先级
-	uint8_t NVIC_IRQChannelSubPriority;
+struct nvicParam {
+    // NVIC通道
+    uint8_t NVIC_IRQChannel;
+    // 抢占优先级
+    uint8_t NVIC_IRQChannelPreemptionPriority;
+    // 响应优先级
+    uint8_t NVIC_IRQChannelSubPriority;
 };
-   
+
 /*******************************************
 * 函数功能：系统外设 储存初始化
 * 函数参数：无

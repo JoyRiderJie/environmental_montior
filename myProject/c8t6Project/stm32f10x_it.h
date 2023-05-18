@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Project/STM32F10x_StdPeriph_Template/stm32f10x_it.h 
+  * @file    Project/STM32F10x_StdPeriph_Template/stm32f10x_it.h
   * @author  MCD Application Team
   * @version V3.6.0
   * @date    20-September-2021
@@ -23,8 +23,8 @@
 #define __STM32F10x_IT_H
 
 #ifdef __cplusplus
- extern "C" {
-#endif 
+extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"

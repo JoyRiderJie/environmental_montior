@@ -15,6 +15,7 @@
 #include "lora_app.h"
 #include "lora_ui.h"
 #include "delay.h"
+#include "Oled.h"
 
 
 /* FreeRTOS files */
@@ -24,6 +25,7 @@
 
 /* 开发板外设功能 */
 #define 	USARTFUNCTION			01
+#define     RTOSFLAG                0
 
 /* 事件组的事件   */
 #define 	EVENT1 		(0x01 << 0)
