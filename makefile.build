@@ -1,0 +1,44 @@
+PHONY := __build
+__build:
+
+# 定义需要的变量
+obj-y :=
+subdir-y :=
+EXTRA_CFLAGS :=
+
+include Makefile
+
+__subdir-y	:= $(patsubst %/,%,$(filter %/, $(obj-y)))
+subdir-y	+= $(__subdir-y)
+
+subdir_objs := $(foreach f,$(subdir-y),$(f)/built-in.o)
+
+cur_objs := $(filter-out %/, $(obj-y))
+dep_files := $(foreach f,$(cur_objs),.$(f).d)
+dep_files := $(wildcard $(dep_files))
+
+ifneq ($(dep_files),)
+  include $(dep_files)
+endif
+
+
+PHONY += $(subdir-y)
+
+# 起始位置
+__build : $(subdir-y) built-in.o
+
+# 编译子目录中的文件
+$(subdir-y):
+	make -C $@ -f $(TOPDIR)/Makefile.build
+
+# 当前目录中的.o文件与子目录中的.o文件打包
+built-in.o : $(cur_objs) $(subdir_objs)
+	$(LD) -r -o $@ $^
+
+dep_file = .$@.d
+
+# 编译当前目录中的文件
+%.o : %.c
+	$(CC) $(CFLAGS) $(EXTRA_CFLAGS) $(CFLAGS_$@) -Wp,-MD,$(dep_file) -c -o $@ $<
+	
+.PHONY : $(PHONY)
